@@ -1,0 +1,35 @@
+.pagination {
+
+    li {
+        display: inline-flex;
+
+    }
+
+
+    a {
+        display: inline-block;
+        color: #fe5f1e !important;
+        text-align: center;
+        justify-content: center;
+        width: 40px;
+        height: 40px;
+        line-height: 38px;
+        border: 1px solid #fe5f1e;
+        border-radius: 30px;
+        margin-right: 10px;
+
+        &:hover {
+            background-color: #fe5f1e;
+            color: #fff !important;
+        }
+    }
+
+    :global {
+        .selected {
+            a {
+                background-color: #fe5f1e;
+                color: #fff !important;
+            }
+        }
+    }
+}

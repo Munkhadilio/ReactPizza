@@ -1,0 +1,18 @@
+.searchModule {
+    border: 1px solid (0, 0, 0, 0.1);
+    padding: 8px 15px;
+    width: 300px;
+    border-radius: 10px;
+    font-size: 16px;
+}
+
+.closeSvg {
+    width: 18px;
+    height: 18px;
+    opacity: 0.3;
+    position: absolute;
+    right: 730px;
+    top: 118px;
+    cursor: pointer;
+
+}
