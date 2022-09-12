@@ -10,19 +10,32 @@ export const list = [{ name: 'популярности', sortProp: 'rating' },
 function Sort({ sortValue, onChangeSort }) {
 
 	const dispatch = useDispatch();
-	const sort = useSelector(state => state.filterSlice.sort);
-
+	const sort = useSelector(state => state.filter.sort);
+	const sortRef = React.useRef();
 	const [open, setOpen] = React.useState(false);
-
-
 
 	const onClickListItem = (obj) => {
 		dispatch(setSort(obj))
 		setOpen(false)
 	}
 
+	React.useEffect(() => {
+
+		const sortClickOutside = (event) => {
+			if (!event.path.includes(sortRef.current)) {
+				setOpen(false)
+			}
+		}
+		// Для обьяснения этого кода в React Заметки
+		document.body.addEventListener('click', sortClickOutside)
+
+		return () => {
+			document.body.removeEventListener('click', sortClickOutside)
+		}
+	}, [])
+
 	return (
-		<div className="sort">
+		<div ref={sortRef} className="sort">
 			<div className="sort__label">
 				<svg
 					width="10"

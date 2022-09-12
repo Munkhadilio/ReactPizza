@@ -15,7 +15,7 @@ import Pagination from '../Pagination/Pagination';
 import { SearchContext } from '../../App';
 
 const Home = () => {
-    const { categoryId, sort, currentPage } = useSelector(state => state.filterSlice)
+    const { categoryId, sort, currentPage } = useSelector(state => state.filter)
     const dispatch = useDispatch();
     const { searchValue } = React.useContext(SearchContext)
     const [items, setItems] = React.useState([]);
