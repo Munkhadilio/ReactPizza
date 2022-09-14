@@ -1,6 +1,7 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 import CartEmptyImg from "../assets/img/empty-cart.png"
+
 const CartEmpty = () => {
     return (
         <div class="container container--cart">
