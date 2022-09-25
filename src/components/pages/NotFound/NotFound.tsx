@@ -1,7 +1,7 @@
 import React from 'react'
 import styles from "../NotFound/NotFound.module.scss"
 
-const NotFound = () => {
+const NotFound: React.FC = () => {
     return (
         <div className={styles.root}>
             <span>😞</span>

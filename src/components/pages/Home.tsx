@@ -7,34 +7,35 @@ import { fetchPizzas, selectorPizzas } from '../../redux/slices/pizzasSlice';
 // import qs from 'qs'
 // import { useNavigate } from 'react-router-dom';
 
-import Sort, { list } from "../../components/Sort";
-import PizzaBlock from "../../components/PizzaBlock/";
-import PizzaSkeleton from "../../components/PizzaBlock/PizzaSkeleton";
+import Sort, { list } from "../Sort";
+import PizzaBlock from "../PizzaBlock";
+import PizzaSkeleton from "../PizzaBlock/PizzaSkeleton";
 import Categories from "../Categories";
 import Pagination from '../Pagination/Pagination';
 import { Link } from 'react-router-dom';
 
-const Home = () => {
+const Home: React.FC = () => {
     const dispatch = useDispatch();
 
     const { categoryId, sort, currentPage, searchValue } = useSelector(selectorFilter)
     const { items, status } = useSelector(selectorPizzas)
 
-    const onChangeCategory = (id) => {
+    const onChangeCategory = (id: number) => {
         dispatch(setCategoryId(id))
     }
 
-    const onChangePage = (number) => {
+    const onChangePage = (number: number) => {
         dispatch(setCurrentPage(number))
     }
 
-    const getPizzas = async (params) => {
+    const getPizzas = async () => {
         const category = categoryId > 0 ? `&category=${categoryId}` : ''
         const order = sort.sortProp.includes('-') ? 'desc' : 'asc'
         const sortBy = sort.sortProp.replace('-', '')
         const search = searchValue ? `&search=${searchValue}` : ''
 
         dispatch(
+            // @ts-ignore
             fetchPizzas({
                 category,
                 order,
@@ -53,7 +54,10 @@ const Home = () => {
         getPizzas()
     }, [categoryId, sort.sortProp, searchValue, currentPage]);
 
-    const pizzas = items.map((obj) => <Link key={obj.id} to={`/pizza/${obj.id}`}><PizzaBlock {...obj} /></Link>);
+    const pizzas = items.map((obj: any) =>
+        <Link key={obj.id} to={`/pizza/${obj.id}`}>
+            <PizzaBlock {...obj} />
+        </Link>);
 
     const skeletons = [...new Array(6)].map((_, index) => <PizzaSkeleton />);
 
