@@ -1,6 +1,7 @@
-import React from 'react'
-import { useSelector, useDispatch } from 'react-redux'
-import { selectorSort, setSort, Sort, SortPropEnum } from '../redux/slices/filterSlice';
+import React from 'react';
+import { useDispatch } from 'react-redux';
+import { setSort } from '../redux/filter/filterSlice';
+import { Sort, SortPropEnum } from '../redux/filter/types';
 
 type List = {
 	name: string;

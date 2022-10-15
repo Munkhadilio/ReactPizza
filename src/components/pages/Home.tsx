@@ -1,9 +1,10 @@
 import React from 'react'
 
 import { useSelector } from 'react-redux';
-import { selectorFilter, setCategoryId, setCurrentPage } from '../../redux/slices/filterSlice';
-import { fetchPizzas, selectorPizzas } from '../../redux/slices/pizzasSlice';
-
+import { setCategoryId, setCurrentPage } from '../../redux/filter/filterSlice';
+import { selectorFilter } from '../../redux/filter/selectors'
+import { fetchPizzas } from '../../redux/pizzas/asynsActions';
+import { selectorPizzas } from '../../redux/pizzas/selectors';
 // import qs from 'qs'
 // import { useNavigate } from 'react-router-dom';
 

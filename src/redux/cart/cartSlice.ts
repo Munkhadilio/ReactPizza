@@ -1,24 +1,15 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit"
-import { RootState } from "../store";
+import { calcTotalPrice } from "../../utils/calcTotalPrice";
+import { getCartLS } from "../../utils/getCartLS";
+import { CartItem, CartSliceState } from "./types";
 
-export type CartItem = {
-    id: string;
-    title: string;
-    type: string;
-    price: number;
-    imageUrl: string;
-    sizes: number;
-    count: number;
-}
 
-interface CartSliceState {
-    totalPrice: number;
-    items: CartItem[];
-} // Когда типизируют State, его делают interface'ом
+
+const cartData = getCartLS()
 
 const initialState: CartSliceState = {
-    totalPrice: 0,
-    items: []
+    totalPrice: cartData.totalPrice,
+    items: cartData.items,
 }
 
 const cartSlice = createSlice({
@@ -38,9 +29,7 @@ const cartSlice = createSlice({
                 })
             }
 
-            state.totalPrice = state.items.reduce((sum, obj) => {
-                return (obj.price * obj.count) + sum
-            }, 0) //начальное значение sum, sum это предыдущая пицца и она сумируется с каждым разом
+            state.totalPrice = calcTotalPrice(state.items);
 
         },
         minusProduct(state, action: PayloadAction<string>) {
@@ -59,9 +48,6 @@ const cartSlice = createSlice({
         }
     }
 });
-
-export const selectorCart = (state: RootState) => state.cart
-export const selectorCartItemById = (id: string) => (state: RootState) => state.cart.items.find(obj => obj.id === id)
 
 export const { addProduct, removeProduct, clearItems, minusProduct } = cartSlice.actions;
 
